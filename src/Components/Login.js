@@ -7,13 +7,23 @@ function Login(props) {
     const [globalState, globalActions] = useGlobal();
     const params = queryString.parse(props.location.search);
     const { code } = params;
-    const { security: { user, state }} = globalState;
+    const { security: { user, state, status, error }} = globalState;
     const { authUrl, clientId } = oauthConfig;
-    if (user) {
-      return (
-        <div>Auth'd as: {user.username}</div>
-      )
-    } 
+    switch (status) {
+        case "authFailure": 
+            if (!code) {
+              window.location.href = "/login";
+            }
+            return (
+                <div class="alert alert-danger">Fail: { error }</div>
+            )
+        case "authenticated":
+            return (
+                <div class="alert alert-success">Auth'd as: {user.username}</div>
+            )
+        default:
+            //nothing
+    }
     
     if (code) {
       globalActions.getToken(code, state);

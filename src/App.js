@@ -9,8 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
 import './App.css';
 import Login from './Components/Login';
+import useGlobal from './store';
 
 function App() {
+  const [globalState] = useGlobal();
+  const { security: { user } } = globalState;
   return (
     <Router>
       <div className="App">
@@ -19,9 +22,9 @@ function App() {
             <li className="nav-item">
               <Link className="nav-link" to="/">Home</Link>
             </li>
-            <li className="nav-item">
+            { user ? "" : (<li className="nav-item">
               <Link className="nav-link" to="/login">Login</Link>
-            </li>
+            </li>) }
             <li className="nav-item">
               <Link className="nav-link" to="/users">Users</Link>
             </li>
