@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
+import Login from './Components/Login';
 
 function App() {
   return (
@@ -26,8 +27,7 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/login">
-          </Route>
+          <Route path="/login" component={Login} />
           <Route path="/users">
           </Route>
           <Route path="/">
