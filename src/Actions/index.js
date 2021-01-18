@@ -29,6 +29,9 @@ const getToken = async (store, code) => {
     }
 }
 
+const getProfile = async token => Axios.get(oauthConfig.verifyUrl, { headers: { Authorization: `bearer ${token}` }})
+
 export default {
     getToken,
+    getProfile,
 }

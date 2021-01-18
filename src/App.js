@@ -10,10 +10,11 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './Components/Login';
 import useGlobal from './store';
+import Profile from './Components/Profile';
 
 function App() {
   const [globalState] = useGlobal();
-  const { security: { user } } = globalState;
+  const { security: { user, accessToken } } = globalState;
   return (
     <Router>
       <div className="App">
@@ -25,15 +26,14 @@ function App() {
             { user ? "" : (<li className="nav-item">
               <Link className="nav-link" to="/login">Login</Link>
             </li>) }
-            <li className="nav-item">
-              <Link className="nav-link" to="/users">Users</Link>
-            </li>
+           { accessToken ? (<li className="nav-item">
+              <Link className="nav-link" to="/profile">Profile</Link>
+            </li>) : "" }
           </ul>
         </nav>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/users">
-          </Route>
+          <Route path="/profile" component={Profile} />
           <Route path="/">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />

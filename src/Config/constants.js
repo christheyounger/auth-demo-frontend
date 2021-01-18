@@ -4,5 +4,6 @@ export const oauthConfig = {
     authServer,
     authUrl: `${authServer}/authorize`,
     tokenUrl: `${authServer}/token`,
+    verifyUrl: `${authServer}/verify`,
     clientId: '2',
 };
