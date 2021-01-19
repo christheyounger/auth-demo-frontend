@@ -13,7 +13,7 @@ function Profile() {
     useEffect(() => {
         !profile && Actions.getProfile(globalState.security.accessToken).then(
             ({data}) => componentIsMounted.current && setProfile(data),
-            error => setError(error.message),
+            error => setError(error.response.data.message),
         );
         return () => {
             componentIsMounted.current = false;
