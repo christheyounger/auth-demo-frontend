@@ -1,34 +1,45 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
-import './App.css';
-import Login from './Components/Login';
-import useGlobal from './store';
-import Profile from './Components/Profile';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "./logo.svg";
+import "./App.css";
+import Login from "./Components/Login";
+import useGlobal from "./store";
+import Profile from "./Components/Profile";
 
 function App() {
   const [globalState] = useGlobal();
-  const { security: { user, accessToken } } = globalState;
+  const {
+    security: { user, accessToken },
+  } = globalState;
   return (
     <Router>
       <div className="App">
         <nav className="navbar navbar-dark bg-dark navbar-extend-lg">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
             </li>
-            { user ? "" : (<li className="nav-item">
-              <Link className="nav-link" to="/login">Login</Link>
-            </li>) }
-           { accessToken ? (<li className="nav-item">
-              <Link className="nav-link" to="/profile">Profile</Link>
-            </li>) : "" }
+            {user ? (
+              ""
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+            )}
+            {accessToken ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="/profile">
+                  Profile
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </nav>
         <Switch>
@@ -45,7 +56,7 @@ function App() {
                 href="https://reactjs.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                >
+              >
                 Learn React
               </a>
             </header>
