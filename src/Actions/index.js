@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { oauthConfig } from "../Config/constants";
-import { get, getWithToken } from "./api";
+import { getWithToken } from "./api";
+import { getQuotes } from "./quotes";
 const { tokenUrl } = oauthConfig;
 
 const getToken = async (store, code) => {
@@ -39,4 +40,5 @@ const getProfile = async (token) => getWithToken(oauthConfig.verifyUrl, token);
 export default {
   getToken,
   getProfile,
+  getQuotes,
 };

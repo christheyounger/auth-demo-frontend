@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "./logo.svg";
 import "./App.css";
-import Login from "./Components/Login";
+import { Login, Profile, Quotes } from "./Components";
 import useGlobal from "./store";
-import Profile from "./Components/Profile";
 
 function App() {
   const [globalState] = useGlobal();
@@ -32,11 +31,18 @@ function App() {
               </li>
             )}
             {accessToken ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">
-                  Profile
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/profile">
+                    Profile
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/quotes">
+                    Quotes
+                  </Link>
+                </li>
+              </>
             ) : (
               ""
             )}
@@ -45,6 +51,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
+          <Route path="/quotes" component={Quotes} />
           <Route path="/">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
