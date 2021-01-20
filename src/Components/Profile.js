@@ -14,7 +14,10 @@ function Profile() {
     !profile &&
       Actions.getProfile(globalState.security.accessToken).then(
         ({ data }) => componentIsMounted.current && setProfile(data),
-        (error) => setError(error.response.data.message)
+        (error) => {
+          setError(error.response?.data.message || error.message);
+          console.error(error);
+        }
       );
     return () => {
       componentIsMounted.current = false;
@@ -29,18 +32,20 @@ function Profile() {
       <div className="jumbotron">
         <h1>Profile</h1>
         <table className="table">
-          <tr>
-            <th>Username</th>
-            <td>{profile.user.username}</td>
-          </tr>
-          <tr>
-            <th>ID</th>
-            <td>{profile.user.id}</td>
-          </tr>
-          <tr>
-            <th>Client</th>
-            <td>{profile.client.name}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Username</th>
+              <td>{profile.user.username}</td>
+            </tr>
+            <tr>
+              <th>ID</th>
+              <td>{profile.user.id}</td>
+            </tr>
+            <tr>
+              <th>Client</th>
+              <td>{profile.client.name}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );

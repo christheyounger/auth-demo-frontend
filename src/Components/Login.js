@@ -16,9 +16,11 @@ function Login(props) {
       if (!code) {
         window.location.href = "/login";
       }
-      return <div class="alert alert-danger">Fail: {error}</div>;
+      return <div className="alert alert-danger">Fail: {error}</div>;
     case "authenticated":
-      return <div class="alert alert-success">Auth'd as: {user.username}</div>;
+      return (
+        <div className="alert alert-success">Auth'd as: {user.username}</div>
+      );
     default:
     //nothing
   }

@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { oauthConfig } from "../Config/constants";
+import { get, getWithToken } from "./api";
 const { tokenUrl } = oauthConfig;
 
 const getToken = async (store, code) => {
@@ -33,10 +34,7 @@ const getToken = async (store, code) => {
   }
 };
 
-const getProfile = async (token) =>
-  Axios.get(oauthConfig.verifyUrl, {
-    headers: { Authorization: `bearer ${token}` },
-  });
+const getProfile = async (token) => getWithToken(oauthConfig.verifyUrl, token);
 
 export default {
   getToken,
