@@ -2,21 +2,22 @@ import Axios from "axios";
 import { oauthConfig } from "../Config/constants";
 import { getWithToken } from "./api";
 import { getQuotes } from "./quotes";
-const { tokenUrl } = oauthConfig;
+const { tokenUrl, clientId, clientSecret } = oauthConfig;
 
 const getToken = async (store, code) => {
   const {
     security: { state },
   } = store.state;
   try {
-    const response = await Axios.post(tokenUrl, { code, state });
+    const body = new URLSearchParams()
+    body.append('code', code);
+    body.append('grant_type', 'authorization_code');
+    const response = await Axios.post(tokenUrl, body, { auth: { username: clientId, password: clientSecret }});
     const {
-      data: { user, accessToken, refreshToken },
+      data: { access_token },
     } = response;
     const security = {
-      user,
-      accessToken,
-      refreshToken,
+      access_token,
       state,
       status: "authenticated",
       error: null,
